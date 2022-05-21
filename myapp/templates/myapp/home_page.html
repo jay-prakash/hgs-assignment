@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="container">
+    <br>
+    <div class="row"><h1>HGS Assignment</h1></div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-6">
+                <label class="form-label">Text</label>
+                <textarea class="form-control" rows="3" name="myText">{{text}}</textarea>
+            </div>
+            <div class="col d-grid gap-2">
+                <div class="row">
+                    <div class="col">
+                        <label class="form-label">Start</label>
+                        <input type="text" class="form-control" name="start" value="{{start}}">
+                    </div>
+                    <div class="col">
+                        <label class="form-label">End</label>
+                        <input type="text" class="form-control" name="end" value="{{end}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input type="submit" name="Submit" class="btn btn-primary col-12">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <br>
+    {% if colored_text %}
+    <div class="card">
+        <h5 class="card-header">Output</h5>
+        <div class="card-body">
+            <p>{{ colored_text|safe }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
